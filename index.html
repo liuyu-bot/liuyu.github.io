@@ -3,153 +3,532 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
+    <title>刘羽 · 个人作品集</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Microsoft YaHei", sans-serif;
+        :root {
+            --blue: #5b9bd5;
+            --blue-light: #e8f4fd;
+            --blue-lighter: #f3f9ff;
+            --mint: #6db58a;
+            --mint-light: #eaf7ef;
+            --text: #333;
+            --text-secondary: #666;
+            --text-muted: #999;
+            --bg: #f8fafb;
+            --card-bg: #fff;
+            --shadow: 0 2px 16px rgba(0,0,0,0.06);
+            --shadow-hover: 0 6px 24px rgba(91,155,213,0.12);
+            --radius: 16px;
+            --radius-sm: 10px;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
+            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
-        /* 头部信息 */
-        .header {
+        /* === COVER / HEADER === */
+        .cover {
             text-align: center;
-            padding: 60px 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 56px 24px 48px;
+            background: linear-gradient(180deg, #eaf4fd 0%, #f8fafb 100%);
         }
 
         .avatar {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            background-color: #4a90e2;
+            background: linear-gradient(135deg, #c9e2f7, #b8d9f0);
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 40px;
+            font-size: 36px;
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(91,155,213,0.18);
+            transition: transform .3s ease;
         }
+        .avatar:hover { transform: scale(1.04); }
 
-        h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
+        .cover h1 {
+            font-size: 30px;
+            font-weight: 700;
             color: #222;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
         }
 
-        .intro {
-            font-size: 16px;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
+        .slogan {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.6;
         }
 
-        /* 通用模块 */
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .section {
-            background-color: #fff;
-            padding: 30px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .section h2 {
-            color: #4a90e2;
-            margin-bottom: 20px;
-            font-size: 22px;
-            border-left: 4px solid #4a90e2;
-            padding-left: 10px;
-        }
-
-        /* 技能列表 */
-        .skills {
+        .meta-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            justify-content: center;
+            gap: 8px 16px;
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
         }
-
-        .skill-tag {
-            background-color: #e8f0fe;
-            color: #4a90e2;
-            padding: 8px 16px;
+        .meta-row span {
+            background: #fff;
+            padding: 4px 14px;
             border-radius: 20px;
-            font-size: 14px;
+            white-space: nowrap;
         }
 
-        /* 联系方式 */
-        .contact-list {
-            list-style: none;
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px 18px;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+        }
+        .contact-row a {
+            color: var(--blue);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .contact-row a:hover { color: #3b7ec4; }
+
+        /* === MAIN CONTAINER === */
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 20px 50px;
         }
 
-        .contact-list li {
-            margin-bottom: 10px;
+        /* === ACCORDION CARD === */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            margin-bottom: 14px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: box-shadow .35s ease, transform .35s ease;
+        }
+        .card:hover { box-shadow: var(--shadow-hover); }
+        .card.open { box-shadow: var(--shadow-hover); }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            cursor: pointer;
+            user-select: none;
+            transition: background .2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card-header:hover { background: #fafcfd; }
+
+        .card-header h2 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #333;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
-        /* 页脚 */
-        footer {
+        .card-header .icon {
+            font-size: 22px;
+            width: 32px;
             text-align: center;
-            padding: 20px;
-            color: #999;
-            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .arrow {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--blue-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--blue);
+            transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1), background .2s;
+            flex-shrink: 0;
+        }
+        .card.open .arrow {
+            transform: rotate(180deg);
+            background: var(--blue);
+            color: #fff;
+        }
+
+        .card-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .5s cubic-bezier(0.4, 0, 0.2, 1), padding .5s ease;
+            padding: 0 24px;
+        }
+        .card.open .card-body {
+            max-height: 2000px;
+            padding: 0 24px 24px;
+        }
+
+        .card-body-inner {
+            border-top: 1px solid #f0f4f7;
+            padding-top: 18px;
+            color: var(--text-secondary);
+            font-size: 14.5px;
+            line-height: 1.85;
+        }
+
+        .card-body-inner p { margin-bottom: 12px; }
+        .card-body-inner p:last-child { margin-bottom: 0; }
+
+        /* skill tags */
+        .skill-cats {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .skill-cat-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .skill-tag {
+            background: var(--blue-lighter);
+            color: var(--blue);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            white-space: nowrap;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .skill-tag:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(91,155,213,0.1); }
+
+        /* experience items */
+        .exp-item { margin-bottom: 20px; }
+        .exp-item:last-child { margin-bottom: 0; }
+        .exp-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 4px 12px;
+            margin-bottom: 6px;
+        }
+        .exp-title { font-weight: 650; color: var(--text); font-size: 15px; }
+        .exp-date {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .exp-role { font-size: 13px; color: var(--blue); margin-bottom: 6px; }
+        .exp-list { padding-left: 18px; }
+        .exp-list li { margin-bottom: 5px; font-size: 14px; }
+        .exp-list li:last-child { margin-bottom: 0; }
+
+        /* education */
+        .edu-item {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 4px 12px;
+            margin-bottom: 10px;
+        }
+        .edu-item:last-child { margin-bottom: 0; }
+        .edu-info { font-weight: 600; color: var(--text); font-size: 14.5px; }
+        .edu-date { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
+        .edu-detail { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+
+        /* honors */
+        .honor-list { padding-left: 18px; }
+        .honor-list li { margin-bottom: 6px; font-size: 14px; }
+        .honor-list li:last-child { margin-bottom: 0; }
+
+        /* === FOOTER === */
+        .footer {
+            text-align: center;
+            padding: 40px 24px 32px;
+            border-top: 1px solid #eef2f5;
+            margin-top: 10px;
+        }
+        .footer .thanks {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        .footer .copyright {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+        .footer .footer-contact {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .footer .footer-contact a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 600px) {
+            .cover { padding: 40px 18px 36px; }
+            .cover h1 { font-size: 26px; }
+            .avatar { width: 90px; height: 90px; font-size: 30px; }
+            .card-header { padding: 16px 18px; }
+            .card-header h2 { font-size: 15.5px; gap: 8px; }
+            .card-body { padding: 0 18px; }
+            .card.open .card-body { padding: 0 18px 20px; }
+            .container { padding: 0 12px 36px; }
+            .card-body-inner { font-size: 14px; }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="avatar">你</div>
-        <h1>你的名字</h1>
-        <p class="intro">2027届国际中文教育研究生 | 求职运营/内容/产品类实习 | 热爱学习与实践</p >
+
+<!-- ====== COVER ====== -->
+<div class="cover">
+    <div class="avatar">🧑‍🎓</div>
+    <h1>刘羽</h1>
+    <p class="slogan">2027届研｜爱折腾的运营小白，期待和你一起成长✨</p>
+    <div class="meta-row">
+        <span>🎂 23岁</span>
+        <span>📍 重庆</span>
+        <span>💼 可全职实习</span>
+        <span>📅 每周5天</span>
     </div>
+    <div class="contact-row">
+        <span>📧 <a href="mailto:1272851567@qq.com">1272851567@qq.com</a></span>
+        <span>📱 17782058190</span>
+    </div>
+</div>
 
-    <div class="container">
-        <!-- 关于我 -->
-        <div class="section">
-            <h2>关于我</h2>
-            <p>我是一名正在转型运营岗位的研究生，有教研实习经历，具备良好的文字表达和用户沟通能力。正在系统学习运营相关技能，熟悉基础的网页搭建和工具使用，希望能在实习中积累实战经验。</p >
+<!-- ====== CARDS ====== -->
+<div class="container" id="cardContainer">
+
+    <!-- 关于我 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <h2><span class="icon">🌟</span>关于我</h2>
+            <div class="arrow">▼</div>
         </div>
-
-        <!-- 技能 -->
-        <div class="section">
-            <h2>技能与工具</h2>
-            <div class="skills">
-                <span class="skill-tag">文案撰写</span>
-                <span class="skill-tag">用户沟通</span>
-                <span class="skill-tag">VS Code / HTML基础</span>
-                <span class="skill-tag">Claude Code AI辅助</span>
-                <span class="skill-tag">Office办公软件</span>
+        <div class="card-body">
+            <div class="card-body-inner">
+                <p>2027届国际中文教育专业研究生，有教研、社群运营、用户转化的实战经验，喜欢折腾新工具、整理SOP、优化流程。性格耐心又细心，执行力拉满，抗压能力在线，能快速适配运营全流程工作。最近在学VS Code、Git和AI工具，正在用Claude Code搭这个作品集，是个爱学习、爱成长的运营小白~</p>
             </div>
         </div>
+    </div>
 
-        <!-- 联系方式 -->
-        <div class="section">
-            <h2>联系方式</h2>
-            <ul class="contact-list">
-                <li>📧 邮箱：your-email@example.com</li>
-                <li>💬 微信：your-wechat-id</li>
-                <li>📁 简历：可私信获取完整版</li>
-            </ul>
+    <!-- 我的技能树 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <h2><span class="icon">🛠️</span>我的技能树</h2>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-body-inner">
+                <div class="skill-cats">
+                    <div>
+                        <div class="skill-cat-label">📊 办公&数据</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Excel</span><span class="skill-tag">PPT</span><span class="skill-tag">Word</span><span class="skill-tag">SPSS数据分析</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="skill-cat-label">📢 运营相关</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">社群运营</span><span class="skill-tag">用户答疑</span><span class="skill-tag">1v1转化</span><span class="skill-tag">SOP搭建</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="skill-cat-label">✍️ 内容创作</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">文案撰写</span><span class="skill-tag">内容校对</span><span class="skill-tag">课件美化</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="skill-cat-label">💻 工具技能</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">VS Code</span><span class="skill-tag">Git</span><span class="skill-tag">GitHub Pages</span><span class="skill-tag">Claude Code等AI工具</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="skill-cat-label">📜 证书</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">英语六级</span><span class="skill-tag">普通话二甲</span><span class="skill-tag">高中语文教师资格证</span><span class="skill-tag">计算机一级</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <footer>
-        © 2025 你的名字 | 个人主页
-    </footer>
+    <!-- 我的实习日记 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <h2><span class="icon">💼</span>我的实习日记</h2>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-body-inner">
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <span class="exp-title">作业帮教育科技</span>
+                        <span class="exp-date">2025.12 – 2026.04</span>
+                    </div>
+                    <div class="exp-role">教研实习生</div>
+                    <ul class="exp-list">
+                        <li>帮老师整理教研资料，做了20+课时的课件，加了互动题和思维导图，让课堂更有趣</li>
+                        <li>把零散的资料做成了标签化管理体系，写了可复用的资源调用SOP，帮团队省了不少时间</li>
+                        <li>负责社群督学和答疑，回复了1500+次用户问题，社群活跃度提升了30%，还协助转化了20名正价课用户</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 我的项目小作品 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <h2><span class="icon">🚀</span>我的项目小作品</h2>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-body-inner">
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <span class="exp-title">AI智能作文批改系统应用实践</span>
+                        <span class="exp-date">2025.06 – 2026.09</span>
+                    </div>
+                    <div class="exp-role">核心主创</div>
+                    <ul class="exp-list">
+                        <li>负责项目全流程运营，从需求调研、流程设计到落地执行都参与了</li>
+                        <li>搭了"AI初批-教师精批-学生修正"的闭环，解决了批改慢、反馈滞后的问题</li>
+                        <li>推动产品在班级试用，作文批改效率提升了10倍以上，还做了成果包装和赛事申报</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <span class="exp-title">重庆师范大学"国际中文教育大模型"建设</span>
+                        <span class="exp-date">2025.08</span>
+                    </div>
+                    <div class="exp-role">词条审核</div>
+                    <ul class="exp-list">
+                        <li>负责多语种词条的中文审核，一共审了20个词条，保证内容合规、标准统一</li>
+                        <li>跟着项目学到了内容审核和标准化执行的重要性，养成了细心严谨的习惯</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <span class="exp-title">"中学西渐"线上汉语教学</span>
+                        <span class="exp-date">2022.09 – 2022.12</span>
+                    </div>
+                    <div class="exp-role">主讲 / 助教 / 课程顾问</div>
+                    <ul class="exp-list">
+                        <li>带3对1小班课，负责课程运营、课堂把控、作业批改和课后答疑</li>
+                        <li>还兼任课程顾问，和学员沟通需求、做学习规划，提升用户满意度和续学意愿</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <span class="exp-title">个人作品集网站搭建</span>
+                        <span class="exp-date">2026.04</span>
+                    </div>
+                    <div class="exp-role">独立完成</div>
+                    <ul class="exp-list">
+                        <li>用VS Code写了HTML+CSS+JS的网页，展示我的求职信息</li>
+                        <li>用Git管理代码，通过GitHub Pages部署上线，全世界都能访问啦</li>
+                        <li>全程用Claude Code辅助开发，解锁了新技能！</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 我的学习成长路 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <h2><span class="icon">🎓</span>我的学习成长路</h2>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-body-inner">
+                <div class="edu-item">
+                    <div>
+                        <div class="edu-info">重庆师范大学</div>
+                        <div class="edu-detail">硕士 · 国际中文教育</div>
+                    </div>
+                    <div class="edu-date">2024 – 2027</div>
+                </div>
+                <div class="edu-item">
+                    <div>
+                        <div class="edu-info">金陵科技学院</div>
+                        <div class="edu-detail">本科 · 汉语国际教育</div>
+                    </div>
+                    <div class="edu-date">2020 – 2024</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 我的小骄傲 -->
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <h2><span class="icon">🏆</span>我的小骄傲</h2>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="card-body">
+            <div class="card-body-inner">
+                <ul class="honor-list">
+                    <li>研究生学业奖学金一等奖</li>
+                    <li>中国研究生国际中文教育案例大赛三等奖</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ====== FOOTER ====== -->
+<div class="footer">
+    <p class="thanks">谢谢你看到这里，期待和你一起开启新旅程💛</p>
+    <p class="copyright">©2026 刘羽 | 个人作品集</p>
+    <p class="footer-contact">
+        📧 <a href="mailto:1272851567@qq.com">1272851567@qq.com</a> &nbsp;·&nbsp; 📱 17782058190
+    </p>
+</div>
+
+<script>
+    function toggleCard(header) {
+        var card = header.parentElement;
+        var isOpen = card.classList.contains('open');
+
+        // Close all cards
+        var allCards = document.querySelectorAll('.card');
+        allCards.forEach(function(c) { c.classList.remove('open'); });
+
+        // Open the clicked one if it wasn't already open
+        if (!isOpen) {
+            card.classList.add('open');
+        }
+    }
+</script>
+
 </body>
 </html>
