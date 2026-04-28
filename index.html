@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 头部信息 */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #4a90e2;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .intro {
+            font-size: 16px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 通用模块 */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            color: #4a90e2;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-left: 4px solid #4a90e2;
+            padding-left: 10px;
+        }
+
+        /* 技能列表 */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background-color: #e8f0fe;
+            color: #4a90e2;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        /* 联系方式 */
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="avatar">你</div>
+        <h1>你的名字</h1>
+        <p class="intro">2027届国际中文教育研究生 | 求职运营/内容/产品类实习 | 热爱学习与实践</p >
+    </div>
+
+    <div class="container">
+        <!-- 关于我 -->
+        <div class="section">
+            <h2>关于我</h2>
+            <p>我是一名正在转型运营岗位的研究生，有教研实习经历，具备良好的文字表达和用户沟通能力。正在系统学习运营相关技能，熟悉基础的网页搭建和工具使用，希望能在实习中积累实战经验。</p >
+        </div>
+
+        <!-- 技能 -->
+        <div class="section">
+            <h2>技能与工具</h2>
+            <div class="skills">
+                <span class="skill-tag">文案撰写</span>
+                <span class="skill-tag">用户沟通</span>
+                <span class="skill-tag">VS Code / HTML基础</span>
+                <span class="skill-tag">Claude Code AI辅助</span>
+                <span class="skill-tag">Office办公软件</span>
+            </div>
+        </div>
+
+        <!-- 联系方式 -->
+        <div class="section">
+            <h2>联系方式</h2>
+            <ul class="contact-list">
+                <li>📧 邮箱：your-email@example.com</li>
+                <li>💬 微信：your-wechat-id</li>
+                <li>📁 简历：可私信获取完整版</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 你的名字 | 个人主页
+    </footer>
+</body>
+</html>
